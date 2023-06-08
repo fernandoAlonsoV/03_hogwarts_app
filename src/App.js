@@ -1,25 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { Provider } from 'react-redux';
+
+import store from './redux/store'
+import Landing from './components/Pages/Landing/Landing';
+import { useEffect } from 'react';
+import { getApplicantsList } from './redux/actionCreator';
 
 function App() {
+
+  useEffect(()=>{
+    store.dispatch(getApplicantsList())
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Landing />
+    </Provider>
   );
 }
 
 export default App;
+
